@@ -1,6 +1,6 @@
 # Работа с google sheets
 
-В репозитории лежит 3 файла .py: All_code, Deleete, Telegram_bot
+В репозитории лежат 3 файла .py: All_code, Deleete, Telegram_bot
 
 ## Deleete
 Программа с автоматическим удалением устаревших файлов, во избежание захламленности.
