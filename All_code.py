@@ -61,16 +61,13 @@ def alg(spreadsheet_id, pdf_file, pdf_name):
             for page_num in range(doc.page_count):
                 page = doc[page_num]
                 text = " / ".join(page.get_text().split('\n')[:-1])
-                try:
-                    numbers = my_dict[text]
-                except Exception as ex:
+                numbers = my_dict.get(text)
+                if numbers is None:
                     continue
 
                 # Эти ухищрения нужны для сохранения качества qr кода
-                pix = page.get_pixmap(alpha=True)
-                img_bytes = pix.tobytes()
-                img_data = io.BytesIO(img_bytes)
-                img = Image.open(img_data).convert("RGB")
+                pix = page.get_pixmap()
+                img = Image.frombytes("RGB", (pix.width, pix.height), pix.samples)
                 alpha = Image.new('L', img.size, 0)
                 img.putalpha(alpha)
 
